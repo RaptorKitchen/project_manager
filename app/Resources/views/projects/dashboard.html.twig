@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+{% block title %}Projects {% endblock %}
+{% block body %}
+    <div class="row">
+        <div class="col">
+            <h1>List:</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h2><i class="fas fa-project-diagram"></i> Projects</h2>
+            <ul>
+            {% for project in projects %}
+                <div class="container">
+                    <div class="row">
+                        <div class="col-3">
+                            <h2><b><a href="/projects/{{ project.id }}">{{ project.name }}</a></b></h2>
+                        </div>
+                        <div class="col-3">
+                            <p>Status: {{ project.status }}</p>
+                        </div>
+                        <div class="col-3">
+                            <p><i class="fas fa-pencil-alt"></i> Update status:</p>
+                            <ul>
+                                <li><a href="/projects/update/{{ project.id }}/3">Incomplete</a></li>
+                                <li><a href="/projects/update/{{ project.id }}/2">In Progress</a></li>
+                                <li><a href="/projects/update/{{ project.id }}/1">Complete</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-3">
+                            <p><i class="fas fa-trash-alt"></i> <a href="/projects/delete/{{ project.id }}">Delete</a></p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+                <li>
+                    <h2>Create New Project</h2>
+                    <form method="post" action="/projects/create/" name="createProject" id="createProject" onsubmit="createNewProject()">
+                        <input type="text" name="project" id="new_project" placeholder="Project Name" />
+                        <input type="submit" value="Create Project" />
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}
